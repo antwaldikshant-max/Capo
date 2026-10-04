@@ -1,0 +1,19 @@
+services:
+  capo:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      CAPO_HOST: 0.0.0.0
+      CAPO_DATA_DIR: /data
+      CAPO_SETUP_TOKEN: ${CAPO_SETUP_TOKEN:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CAPO_FROM_EMAIL: ${CAPO_FROM_EMAIL:-}
+    volumes:
+      - capo_data:/data
+
+volumes:
+  capo_data:

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Owner Dashboard — Capo</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <a class="skip-link" href="#admin-main">Skip to dashboard</a>
+  <div class="auth-screen" id="auth-screen">
+    <a class="brand auth-brand" href="/"><svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#111827"/><circle cx="15.2" cy="17.3" r="2.15" fill="#fff"/><circle cx="28.8" cy="17.3" r="2.15" fill="#fff"/><path d="M12.5 23.2c1.8 6.2 5 9.2 9.5 9.2s7.7-3 9.5-9.2c-3.1 2.2-6.3 3.3-9.5 3.3s-6.4-1.1-9.5-3.3Z" fill="#fff"/></svg><span>Capo</span><small>OWNER</small></a>
+    <main class="auth-card" id="auth-main">
+      <div class="auth-symbol" aria-hidden="true">⌘</div>
+      <span class="admin-kicker" id="auth-kicker">PRIVATE OWNER ACCESS</span>
+      <h1 id="auth-title">Welcome back.</h1>
+      <p class="auth-copy" id="auth-copy">Sign in to manage your website and private project inbox.</p>
+      <div class="auth-message" id="auth-message" role="status" aria-live="polite"></div>
+      <form id="login-form" class="auth-form" hidden>
+        <label for="login-email">Owner email<input id="login-email" name="email" type="email" autocomplete="username" required></label>
+        <label for="login-password">Password<input id="login-password" name="password" type="password" autocomplete="current-password" required minlength="12"></label>
+        <button class="admin-button admin-button-primary" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+      <form id="setup-form" class="auth-form" hidden>
+        <label for="setup-token">One-time setup token<input id="setup-token" name="token" type="password" autocomplete="off" required></label>
+        <label for="setup-email">Owner email<input id="setup-email" name="email" type="email" autocomplete="email" required></label>
+        <label for="setup-password">Create a password<input id="setup-password" name="password" type="password" autocomplete="new-password" minlength="12" required><small>Use at least 12 characters.</small></label>
+        <button class="admin-button admin-button-primary" type="submit">Create owner account <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-footnote">This dashboard is private. Your password is stored as a one-way hash.</p>
+    </main>
+    <a class="auth-back" href="/setup">Server setup guide ↗</a>
+    <a class="auth-back" href="/">← Back to Capo website</a>
+  </div>
+
+  <div class="admin-app" id="admin-app" hidden>
+    <aside class="sidebar" id="admin-sidebar">
+      <a class="brand sidebar-brand" href="/"><svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#111827"/><circle cx="15.2" cy="17.3" r="2.15" fill="#fff"/><circle cx="28.8" cy="17.3" r="2.15" fill="#fff"/><path d="M12.5 23.2c1.8 6.2 5 9.2 9.5 9.2s7.7-3 9.5-9.2c-3.1 2.2-6.3 3.3-9.5 3.3s-6.4-1.1-9.5-3.3Z" fill="#fff"/></svg><span>Capo</span></a>
+      <div class="sidebar-label">WEBSITE</div>
+      <nav class="admin-nav" aria-label="Dashboard sections">
+        <button data-view="overview" class="nav-item active" aria-label="Overview" title="Overview"><span aria-hidden="true">◫</span> Overview</button>
+        <button data-view="content" class="nav-item" aria-label="Site content" title="Site content"><span aria-hidden="true">▤</span> Site content</button>
+        <button data-view="services" class="nav-item" aria-label="Services and pricing" title="Services and pricing"><span aria-hidden="true">✳</span> Services & pricing</button>
+        <button data-view="projects" class="nav-item" aria-label="Portfolio" title="Portfolio"><span aria-hidden="true">▧</span> Portfolio</button>
+        <button data-view="process" class="nav-item" aria-label="Process" title="Process"><span aria-hidden="true">↗</span> Process</button>
+        <button data-view="faqs" class="nav-item" aria-label="FAQs" title="FAQs"><span aria-hidden="true">?</span> FAQs</button>
+      </nav>
+      <div class="sidebar-label inbox-label">PRIVATE</div>
+      <nav class="admin-nav" aria-label="Private inbox">
+        <button data-view="inbox" class="nav-item" aria-label="Project inbox" title="Project inbox"><span aria-hidden="true">✉</span> Project inbox <span id="inbox-count" class="inbox-count">0</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="owner-avatar">C</div><div class="owner-info"><b id="owner-email">Owner</b><span>Private dashboard</span></div><button class="icon-button" id="logout-button" type="button" aria-label="Sign out" title="Sign out">↗</button></div>
+    </aside>
+    <div class="admin-workspace">
+      <header class="admin-topbar"><div><span class="breadcrumb">Capo <span>/</span> <b id="crumb-current">Overview</b></span></div><div class="topbar-actions"><a href="/" target="_blank" rel="noopener noreferrer" class="view-site">View public site <span aria-hidden="true">↗</span></a><button class="admin-button admin-button-primary save-button" type="button" id="save-button">Save changes</button></div></header>
+      <main class="admin-main" id="admin-main">
+        <div class="save-status" id="save-status" role="status" aria-live="polite"></div>
+        <section class="admin-view active" id="view-overview">
+          <div class="page-heading"><div><span class="admin-kicker">YOUR STUDIO AT A GLANCE</span><h1>Good to see you.</h1><p>Manage your website, services, pricing, and project conversations.</p></div></div>
+          <div class="stats-grid"><article class="stat-card"><span>Visible services</span><b id="stat-services">—</b><small>On your public site</small></article><article class="stat-card"><span>Portfolio items</span><b id="stat-projects">—</b><small>Published projects</small></article><article class="stat-card"><span>Project inquiries</span><b id="stat-inquiries">—</b><small>In your private inbox</small></article></div>
+          <div class="overview-grid"><article class="panel overview-panel"><div class="panel-heading"><div><h2>Keep your site current</h2><p>Add your details when you’re ready to share them.</p></div></div><div class="quick-links"><button data-view="content"><span class="quick-icon">▤</span><span><b>Update website content</b><small>Headlines, introductions, and section text</small></span><span class="quick-arrow">→</span></button><button data-view="services"><span class="quick-icon">✳</span><span><b>Manage services & pricing</b><small>Add, edit, hide, or remove offerings</small></span><span class="quick-arrow">→</span></button><button data-view="projects"><span class="quick-icon">▧</span><span><b>Add portfolio projects</b><small>Share work you’re ready to publish</small></span><span class="quick-arrow">→</span></button><button data-view="inbox"><span class="quick-icon">✉</span><span><b>Open private inbox</b><small>Review inquiries and email clients</small></span><span class="quick-arrow">→</span></button></div></article><article class="panel setup-panel"><div class="panel-heading"><div><h2>Connection status</h2><p>Features show as ready when configured.</p></div></div><div id="connection-status" class="connection-status"></div><div class="panel-footnote">For setup instructions, see <a href="/setup" target="_blank" rel="noopener noreferrer">the deployment guide</a>.</div></article></div>
+        </section>
+
+        <section class="admin-view" id="view-content"><div class="page-heading"><div><span class="admin-kicker">EDIT WHAT VISITORS SEE</span><h1>Site content</h1><p>Update the words on your homepage. Changes appear publicly after you save.</p></div></div><div class="panel form-panel"><div class="panel-heading"><div><h2>Homepage copy</h2><p>Keep it clear and true to your business.</p></div></div><div class="content-fields" id="content-fields"></div></div></section>
+
+        <section class="admin-view" id="view-services"><div class="page-heading"><div><span class="admin-kicker">WHAT YOU OFFER</span><h1>Services & pricing</h1><p>Add services, enter your own USD prices, or hide offerings while you update them.</p></div><button class="admin-button admin-button-outline" id="add-service" type="button">＋ Add service</button></div><div class="editor-list" id="service-editor"></div><div class="editor-note"><span>i</span> Hidden services are saved privately and won’t appear on the public site.</div></section>
+
+        <section class="admin-view" id="view-projects"><div class="page-heading"><div><span class="admin-kicker">WORK YOU CHOOSE TO SHARE</span><h1>Portfolio</h1><p>Add project details that you’re ready to make public. Leave the link blank if there isn’t a public page.</p></div><button class="admin-button admin-button-outline" id="add-project" type="button">＋ Add project</button></div><div class="editor-list" id="project-editor"></div><div class="editor-note"><span>i</span> Only projects marked visible will appear in the public portfolio.</div></section>
+
+        <section class="admin-view" id="view-process"><div class="page-heading"><div><span class="admin-kicker">HOW YOU WORK</span><h1>Project process</h1><p>Describe the steps a client can expect. These are shown in order on your homepage.</p></div><button class="admin-button admin-button-outline" id="add-process" type="button">＋ Add step</button></div><div class="editor-list" id="process-editor"></div></section>
+
+        <section class="admin-view" id="view-faqs"><div class="page-heading"><div><span class="admin-kicker">HELP VISITORS DECIDE</span><h1>FAQs</h1><p>Add answers you’re comfortable publishing. Hidden questions stay private.</p></div><button class="admin-button admin-button-outline" id="add-faq" type="button">＋ Add question</button></div><div class="editor-list" id="faq-editor"></div></section>
+
+        <section class="admin-view" id="view-inbox"><div class="page-heading"><div><span class="admin-kicker">PRIVATE PROJECT MESSAGES</span><h1>Project inbox</h1><p>Inquiries sent from the public website are stored privately on this server.</p></div></div><div id="email-notice" class="email-notice"></div><div class="inbox-layout"><div class="inbox-list panel" id="inquiry-list" aria-label="Project inquiries"></div><div class="inquiry-detail panel" id="inquiry-detail"><div class="inbox-empty"><span class="empty-envelope">✉</span><h2>Select an inquiry</h2><p>Choose a message from the list to read and reply.</p></div></div></div></section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

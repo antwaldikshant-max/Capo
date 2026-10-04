@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Setup Guide — Capo</title><link rel="stylesheet" href="/admin.css"></head>
+<body>
+  <main class="setup-guide-page">
+    <a class="brand" href="/"><svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#111827"/><circle cx="15.2" cy="17.3" r="2.15" fill="#fff"/><circle cx="28.8" cy="17.3" r="2.15" fill="#fff"/><path d="M12.5 23.2c1.8 6.2 5 9.2 9.5 9.2s7.7-3 9.5-9.2c-3.1 2.2-6.3 3.3-9.5 3.3s-6.4-1.1-9.5-3.3Z" fill="#fff"/></svg><span>Capo</span></a>
+    <h1>Set up Capo online</h1>
+    <p>This site runs on Node.js 20 or newer without package installation. The app stores site content and private project inquiries in a JSON file. Use a persistent server disk and an HTTPS reverse proxy for an online deployment.</p>
+    <h2>1. Start the server</h2>
+    <p>The included Docker Compose setup builds the site and keeps data in the <code>capo_data</code> volume. On a Docker host, set a random first-owner token in a private <code>.env</code> file beside <code>docker-compose.yml</code>:</p>
+    <pre><code>CAPO_SETUP_TOKEN=replace-this-with-a-long-random-secret
+# Optional, for email replies from the private inbox:
+RESEND_API_KEY=
+CAPO_FROM_EMAIL=</code></pre>
+    <p>Generate a random secret with <code>node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"</code>, then start the app with:</p>
+    <pre><code>docker compose up --build -d</code></pre>
+    <h2>2. Create your private owner login</h2>
+    <p>After the app is behind HTTPS, visit <code>https://your-domain/admin</code>. Use the setup token to create the owner email and a password of at least 12 characters. Once the account is created, delete <code>CAPO_SETUP_TOKEN</code> from <code>.env</code> and restart with <code>docker compose up -d</code>.</p>
+    <h2>3. Connect email replies (optional)</h2>
+    <p>In Resend, <a href="https://resend.com/domains" target="_blank" rel="noopener noreferrer">verify a sending domain</a> and <a href="https://resend.com/api-keys" target="_blank" rel="noopener noreferrer">create an API key</a> with email sending permission. Set <code>RESEND_API_KEY</code> and <code>CAPO_FROM_EMAIL</code> to that key and your verified sender address, then restart the app. Replies are sent only when the dashboard shows email as ready.</p>
+    <p>Project inquiries are saved in the inbox without email setup. The server does not email the owner when a new inquiry arrives.</p>
+    <h2>Storage and privacy</h2>
+    <p>Keep <code>/data</code> on a persistent private volume and make regular backups. Run a single app instance against the JSON file. The owner password is stored as a salted hash; inquiry and content records are stored as plain JSON on the server disk. The application does not create HTTPS certificates; use your hosting platform or an HTTPS reverse proxy.</p>
+    <p>See the <code>README.md</code> file in the project folder for environment variables and the full deployment notes.</p>
+    <p><a href="/admin">Open the owner dashboard →</a> · <a href="/">Back to the public website</a></p>
+  </main>
+</body>
+</html>
